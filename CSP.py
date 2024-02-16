@@ -22,9 +22,6 @@ for i, task in enumerate(tasks1):
 # Step 2: Define Constraints
 def constraint_function(ts1, ts2, ta1, ta2):
     # Example constraint: Tasks cannot be scheduled in the same time slot
-    #print(ts1)
-    #print(ts2)
-    #print("skip")
     dic1 = {}
     for t in tasks:
         # print(t)
@@ -38,12 +35,9 @@ def constraint_function(ts1, ts2, ta1, ta2):
             break
 
     if dic1["order"] <= dic2["order"]:
-        #print("here")
         return ta1 + dic1["length"] < ta2
     else:
-        #print("there")
         return ta1 > ta2 + dic2["length"]
-    #return ta1 + dic1["length"] < ta2 or ta1 > ta2 + dic2["length"]
 
 
 for task1 in tasks1:
@@ -54,7 +48,6 @@ for task1 in tasks1:
             constraint_with_tasks = partial(constraint_function, ts1, ts2)
 
             problem.addConstraint(constraint_with_tasks, (task1, task2))
-            #problem.addConstraint(constraint_function, (task2, task1))
 
 # Step 3: Solve the CSP
 solutions = problem.getSolutions()
